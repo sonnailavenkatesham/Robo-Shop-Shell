@@ -13,7 +13,8 @@ yum install git -y
 
 if [ $? -ne 0 ]
 then  
-    echo "Installation...FAILED"
+    echo -e "$R Installation...FAILED $N"
+    exit 1
 else    
-    echo "Installation....SUCCESS"
+    echo -e "$G Installation....SUCCESS $N"
 fi
