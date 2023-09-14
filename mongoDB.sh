@@ -3,6 +3,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+PACKEGE=$(yum list installed)
 USERID=$(id -u)
 if [ $USERID -ne 0 ]
 then 
@@ -21,6 +22,12 @@ fi
 
 yum install git -y
 VALIDATE $? "git"
+if [ $? -ne 0]
+then 
+    echo -e "Installing..$2......"
+then
+    echo -e "$Y $2 Already..Installed..$N"
+fi
 
 yum install postfix -y
 VALIDATE $? "postfix"
