@@ -26,3 +26,4 @@ yum install git -y
 VALIDATE $? "git"
 else
     echo "Already installed git"
+fi
