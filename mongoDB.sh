@@ -29,8 +29,19 @@ else
     echo -e "$Y $2 Already..Installed..$N"
 fi
 
-yum install postfix -y
-VALIDATE $? "postfix"
-
-yum install mysql -y
-VALIDATE $? "mysql"
+if [ $? -ne 0]
+then 
+    echo -e "Installing..$2......"
+    yum install git -y
+    VALIDATE $? "postfix"
+else
+    echo -e "$Y $2 Already..Installed..$N"
+fi
+if [ $? -ne 0]
+then 
+    echo -e "Installing..$2......"
+    yum install git -y
+    VALIDATE $? "mysql"
+else
+    echo -e "$Y $2 Already..Installed..$N"
+fi
