@@ -10,3 +10,10 @@ then
     exit 1
 fi
 yum install git -y
+
+if [ $? -ne 0 ]
+then  
+    echo "Installation...FAILED"
+else    
+    echo "Installation....SUCCESS"
+fi
