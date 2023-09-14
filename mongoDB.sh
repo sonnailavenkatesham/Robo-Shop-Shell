@@ -20,7 +20,7 @@ else
 fi
 }
 
-if [ $? -ne 0]
+if [ $? -ne 0 ]
 then 
     echo -e "Installing..$2......"
     yum install git -y
@@ -29,7 +29,7 @@ else
     echo -e "$Y $2 Already..Installed..$N"
 fi
 
-if [ $? -ne 0]
+if [ $? -ne 0 ]
 then 
     echo -e "Installing..$2......"
     yum install git -y
@@ -37,7 +37,7 @@ then
 else
     echo -e "$Y $2 Already..Installed..$N"
 fi
-if [ $? -ne 0]
+if [ $? -ne 0 ]
 then 
     echo -e "Installing..$2......"
     yum install git -y
