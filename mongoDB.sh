@@ -26,25 +26,23 @@ then
     yum install git -y
     VALIDATE $? "git"
 else
-    echo -e "$Y $2 Already..Installed..$N"
-    VALIDATE $? "git"
+    echo -e "$Y git Already..Installed..$N"
 fi
 
 if [ $1 -ne 0 ]
 then 
     echo -e "Installing..$2......"
-    yum install git -y
+    yum install postfix -y
     VALIDATE $? "postfix"
 else
-    echo -e "$Y $2 Already..Installed..$N"
-    VALIDATE $? "postfix"
+    echo -e "$Y  Already..Installed..postfix $N"
 fi
+
 if [ $1 -ne 0 ]
 then 
     echo -e "Installing..$2......"
-    yum install git -y
+    yum install mysql -y
     VALIDATE $? "mysql"
 else
-    echo -e "$Y $2 Already..Installed..$N"
-    VALIDATE $? "mysql"
+    echo -e "$Y  Already..Installed.. mysql $N"
 fi
