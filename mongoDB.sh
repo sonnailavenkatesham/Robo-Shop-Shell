@@ -9,12 +9,21 @@ then
     echo -e "$R ERROR: You are not Root User..$N"
     exit 1
 fi
-yum install git -y
-
-if [ $? -ne 0 ]
+VALIDATE(){
+if [ $1 -ne 0 ]
 then  
-    echo -e "$R Installation...FAILED $N"
+    echo -e "$R Installation..$2..FAILED $N"
     exit 1
 else    
-    echo -e "$G Installation....SUCCESS $N"
+    echo -e "$G Installation..$2..SUCCESS $N"
 fi
+}
+
+yum install git -y
+VALIDATE $? "git"
+
+yum install postfix -y
+VALIDATE $? "postfix"
+
+yum install mysql -y
+VALIDATE $? "mysql"
