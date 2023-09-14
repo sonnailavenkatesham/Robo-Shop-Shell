@@ -27,6 +27,7 @@ then
     VALIDATE $? "git"
 else
     echo -e "$Y $2 Already..Installed..$N"
+    VALIDATE $? "git"
 fi
 
 if [ $1 -ne 0 ]
@@ -36,6 +37,7 @@ then
     VALIDATE $? "postfix"
 else
     echo -e "$Y $2 Already..Installed..$N"
+    VALIDATE $? "postfix"
 fi
 if [ $1 -ne 0 ]
 then 
@@ -44,4 +46,5 @@ then
     VALIDATE $? "mysql"
 else
     echo -e "$Y $2 Already..Installed..$N"
+    VALIDATE $? "mysql"
 fi
