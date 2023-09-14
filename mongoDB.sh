@@ -20,11 +20,11 @@ else
 fi
 }
 
-yum install git -y
-VALIDATE $? "git"
 if [ $? -ne 0]
 then 
     echo -e "Installing..$2......"
+    yum install git -y
+    VALIDATE $? "git"
 else
     echo -e "$Y $2 Already..Installed..$N"
 fi
