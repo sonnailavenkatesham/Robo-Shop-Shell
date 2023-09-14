@@ -20,10 +20,4 @@ else
 fi
 }
 
-if [ $1 -ne 0 ]
-then
-yum install git -y
-VALIDATE $? "postfix"
-else
-    echo "Already installed postfix"
-fi
+yum install postfix -y
