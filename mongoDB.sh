@@ -23,7 +23,7 @@ fi
 if [ $1 -ne 0 ]
 then
 yum install git -y
-VALIDATE $? "git"
+VALIDATE $? "postfix"
 else
-    echo "Already installed git"
+    echo "Already installed postfix"
 fi
