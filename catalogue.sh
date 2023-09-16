@@ -26,11 +26,17 @@ fi
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOGFILE
 VALIDATE $? "Downloading catalogue artifact"
 
+yum list installed nodejs
+if [ $? -ne 0 ]
+then 
 yum install nodejs -y &>>$LOGFILE
 VALIDATE $? "Installing nodeJS"
+else
+    echo "$Y nodejs Already Installed $N"
+fi
 
 USER=$(id roboshop)
-if [ $USER -NE 0 ]
+if [ $USER -ne 0 ]
 then
     useradd roboshop &>>$LOGFILE
 fi
