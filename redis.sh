@@ -23,20 +23,20 @@ else
 fi
 }
 
-yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
+yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>> $LOGFILE
 VALIDATE $? "rpms.remirepo.net"
 
-yum module enable redis:remi-6.2 -y
+yum module enable redis:remi-6.2 -y &>> $LOGFILE
 VALIDATE $? "enable redis:remi-6.2"
 
-yum install redis -y 
+yum install redis -y  &>> $LOGFILE
 VALIDATE $? "install redis"
 
-sed -i 's/127.0.0.1/0.0.0./' /etc/redis.conf
+sed -i 's/127.0.0.1/0.0.0./' /etc/redis.conf &>> $LOGFILE
 VALIDATE $? "redis edited congig"
 
-systemctl enable redis
+systemctl enable redis &>> $LOGFILE
 VALIDATE $? "enable redis"
 
-systemctl start redis
+systemctl start redis &>> $LOGFILE
 VALIDATE $? "start redis"
