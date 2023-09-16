@@ -23,20 +23,20 @@ else
 fi
 }
 
-cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo
+cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
 VALIDATE $? "copying mongo.repo file"
 
-yum install mongodb-org -y
+yum install mongodb-org -y &>>$LOGFILE
 VALIDATE $? "Installing MongoDB"
 
-systemctl enable mongod
+systemctl enable mongod &>>$LOGFILE
 VALIDATE $? "enable mongod"
 
-systemctl start mongod
+systemctl start mongod &>>$LOGFILE
 VALIDATE $? "start mongod"
 
-sed i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+sed i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$LOGFILE
 VALIDATE $? "chagned mongod config"
 
-systemctl restart mongod
+systemctl restart mongod &>>$LOGFILE
 VALIDATE $? "restart mongod"
