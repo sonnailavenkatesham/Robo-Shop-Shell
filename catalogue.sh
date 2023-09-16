@@ -32,13 +32,15 @@ then
 yum install nodejs -y &>>$LOGFILE
 VALIDATE $? "Installing nodeJS"
 else
-    echo "$Y nodejs Already Installed $N"
+    echo -e "$Y nodejs Already Installed $N"
 fi
 
-USER=$(id roboshop)
-if [ $USER -ne 0 ]
+id roboshop
+if [ $? -ne 0 ]
 then
     useradd roboshop &>>$LOGFILE
+else    
+    echo -e "$Y user roboshop is already exist $N"
 fi
 
 ls app
