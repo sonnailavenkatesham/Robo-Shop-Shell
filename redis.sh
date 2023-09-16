@@ -32,7 +32,7 @@ VALIDATE $? "enable redis:remi-6.2"
 yum install redis -y  &>> $LOGFILE
 VALIDATE $? "install redis"
 
-sed -i 's/127.0.0.1/0.0.0.0/' /etc/redis.conf &>> $LOGFILE
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis.conf &>> $LOGFILE
 VALIDATE $? "redis edited congig"
 
 systemctl enable redis &>> $LOGFILE
