@@ -45,8 +45,6 @@ VALIDATE $? "moving app directory"
 unzip /tmp/user.zip &>>$LOGFILE
 VALIDATE $? "user.zip"
 
-cd /app  &>>$LOGFILE
-
 npm install  &>>$LOGFILE
 
 cp /home/centos/Robo-Shop-Shell/user.service /etc/systemd/system/user.service &>>$LOGFILE
