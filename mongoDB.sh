@@ -26,7 +26,7 @@ fi
 cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
 VALIDATE $? "copying mongo.repo file"
 yum list installed mongodb 
-if [ $? -ne o ]
+if [ $? -ne 0 ]
 then
     echo -e "$Y MongoDB Already Installed..$N"
 else
