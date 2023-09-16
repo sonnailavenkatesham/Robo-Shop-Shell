@@ -55,10 +55,10 @@ fi
 curl -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$LOGFILE
 VALIDATE $? "user artifact"
 
-cd /app &>>$LOGFILE
+cd /app 
 VALIDATE $? "created app directory"
 
-unzip /tmp/user.zip &>>$LOGFILE
+unzip /tmp/user.zip 
 VALIDATE $? "unziping user"
 
 npm install &>>$LOGFILE
