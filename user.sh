@@ -24,14 +24,24 @@ fi
 }
 
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOGFILE
+VALIDATE $? "Downloading catalogue artifact"
 
-VALIDATE $? "setting user artifact"
-
+yum list installed nodejs &>>$LOGFILE
+if [ $? -ne 0 ]
+then 
 yum install nodejs -y &>>$LOGFILE
-VALIDATE $? "install nodejs"
+VALIDATE $? "Installing nodeJS"
+else
+    echo -e "$Y nodejs Already Installed $N"
+fi
 
-useradd roboshop &>>$LOGFILE
-VALIDATE $? "roboshop"
+id roboshop &>>$LOGFILE
+if [ $? -ne 0 ]
+then
+    useradd roboshop &>>$LOGFILE
+else    
+    echo -e "$Y user roboshop is already exist $N"
+fi
 
 mkdir /app &>>$LOGFILE
 VALIDATE $? "created app directory"
