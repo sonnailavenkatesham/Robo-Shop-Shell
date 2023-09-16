@@ -63,7 +63,7 @@ else
     echo -e "$Y Already in app directory $N"
 fi
 
-unzip /tmp/usert.zip &>>$LOGFILE
+unzip /tmp/user.zip &>>$LOGFILE
 VALIDATE $? "unziping usert"
 
 npm install &>>$LOGFILE
