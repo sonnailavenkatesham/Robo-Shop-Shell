@@ -26,7 +26,7 @@ fi
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOGFILE
 VALIDATE $? "Downloading catalogue artifact"
 
-yum list installed nodejs
+yum list installed nodejs &>>$LOGFILE
 if [ $? -ne 0 ]
 then 
 yum install nodejs -y &>>$LOGFILE
@@ -35,7 +35,7 @@ else
     echo -e "$Y nodejs Already Installed $N"
 fi
 
-id roboshop
+id roboshop &>>$LOGFILE
 if [ $? -ne 0 ]
 then
     useradd roboshop &>>$LOGFILE
@@ -43,7 +43,7 @@ else
     echo -e "$Y user roboshop is already exist $N"
 fi
 
-ls /app
+ls /app &>>$LOGFILE
 if [ $? -ne o ]
 then
     mkdir /app &>>$LOGFILE
@@ -78,7 +78,7 @@ VALIDATE $? "start catalogue"
 cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
 VALIDATE $? "copying to mongo.repo"
 
-yum list installed mongodb-org-shell
+yum list installed mongodb-org-shell &>>$LOGFILE
 if [ $? -ne 0 ]
 then
     yum install mongodb-org-shell -y &>>$LOGFILE
