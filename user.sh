@@ -43,14 +43,17 @@ else
     echo -e "$Y user roboshop is already exist $N"
 fi
 
-mkdir /app &>>$LOGFILE
-VALIDATE $? "created app directory"
+ls /app &>>$LOGFILE
+if [ $? -ne o ]
+then
+    mkdir /app &>>$LOGFILE
+    VALIDATE $? "created app directory"
+else
+    echo -e "$Y App directory already exist $N"
+fi
 
 curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$LOGFILE
-VALIDATE $? "installing dependencies"
-
-cd /app &>>$LOGFILE
-VALIDATE $? "moving app directory" 
+VALIDATE $? "installing dependencies" 
 
 unzip /tmp/user.zip &>>$LOGFILE
 VALIDATE $? "user.zip"
