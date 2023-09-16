@@ -27,11 +27,5 @@ ALL_COMMANDS=("curl -sL https://rpm.nodesource.com/setup_lts.x | bash" "yum inst
 
 for command in "${ALL_COMMANDS[@]}" &>>$LOGFILE
  do
-    if [ $? -ne 0 ]
-    then
-        $command
-        VALIDATE $@ "$command"
-    else 
-        echo -e "$Y $i Already done.. $N"
-    fi 
+    $command
 done
