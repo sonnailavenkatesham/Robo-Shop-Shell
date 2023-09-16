@@ -44,6 +44,13 @@ else
 fi
 
 ls /app &>>$LOGFILE
+if [ $? -ne o ]
+then
+    mkdir /app &>>$LOGFILE
+    VALIDATE $? "created app directory"
+else
+    echo -e "$Y App directory already exist $N"
+fi
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>>$LOGFILE
 
