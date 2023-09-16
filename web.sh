@@ -22,10 +22,29 @@ else
     echo -e " $2..$G SUCCESS $N"
 fi
 }
-yum install nginx -y
-systemctl enable nginx
-systemctl start nginx
-rm -rf /usr/share/nginx/html/*
-curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip
-cd /usr/share/nginx/html
-unzip /tmp/web.zip
+yum install nginx -y &>>$LOGFILE
+VALIDATE $? "install nginx"
+
+systemctl enable nginx &>>$LOGFILE
+VALIDATE $? "enable nginx"
+
+systemctl start nginx &>>$LOGFILE
+VALIDATE $? "start nginx"
+
+rm -rf /usr/share/nginx/html/* &>>$LOGFILE
+VALIDATE $? "remove usr"
+
+curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>>$LOGFILE
+VALIDATE $? "start zipping"
+
+cd /usr/share/nginx/html &>>$LOGFILE
+VALIDATE $? "changing user"
+
+unzip /tmp/web.zip &>>$LOGFILE
+VALIDATE $? "web.zip"
+
+cp /home/centos/Robo-Shop-Shell/roboshop.conf /etc/nginx/default.d/roboshop.conf  &>>$LOGFILE
+VALIDATE $? "copying roboshop.conf"
+
+systemctl restart nginx &>>$LOGFILE
+VALIDATE $? "restart nginx"
