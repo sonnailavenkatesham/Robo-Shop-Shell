@@ -24,7 +24,7 @@ fi
 }
 
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOGFILE
-VALIDATE $? "Downloading catalogue artifact"
+VALIDATE $? "Downloading user artifact"
 
 yum list installed nodejs &>>$LOGFILE
 if [ $? -ne 0 ]
@@ -56,6 +56,17 @@ curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$L
 VALIDATE $? "installing dependencies"
 
 ls /app &>>$LOGFILE
+if [ $? -ne o ]
+then
+    mkdir /app &>>$LOGFILE
+    VALIDATE $? "created app directory"
+else
+    echo -e "$Y App directory already exist $N"
+fi
+
+curl -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$LOGFILE
+
+ls /app &>>$LOGFILE
 if [ $? -ne 0 ]
 then
     cd /app &>>$LOGFILE
@@ -65,9 +76,10 @@ else
 fi
 
 unzip /tmp/user.zip &>>$LOGFILE
-VALIDATE $? "unziping catalogue"
+VALIDATE $? "unziping user"
 
-npm install  &>>$LOGFILE
+npm install &>>$LOGFILE
+VALIDATE $? "Installing Dependies"
 
 cp /home/centos/Robo-Shop-Shell/user.service /etc/systemd/system/user.service &>>$LOGFILE
 
@@ -82,9 +94,13 @@ VALIDATE $? "start user"
 
 cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE 
 VALIDATE $? "copying mongo.repo "
-
-yum install mongodb-org-shell -y &>>$LOGFILE
-VALIDATE $? "install mongodb-org-shell"
+yum list installed mongodb-org-shell
+if [ $? -ne 0 ]
+then 
+    yum install mongodb-org-shell -y &>>$LOGFILE
+    VALIDATE $? "install mongodb-org-shell"
+else    
+    echo -e "$Y mongodb-org-shell Aleady Installed $N"
 
 mongo --host mongodb.venkateshamsonnalia143.online </app/schema/user.js &>>$LOGFILE
 VALIDATE $? "hostted mongodb"
