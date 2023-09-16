@@ -44,7 +44,7 @@ else
 fi
 
 ls /app &>>$LOGFILE
-if [ $? -ne o ]
+if [ $? -ne 0 ]
 then
     mkdir /app &>>$LOGFILE
     VALIDATE $? "created app directory"
