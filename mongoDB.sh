@@ -25,7 +25,8 @@ fi
 
 cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
 VALIDATE $? "copying mongo.repo file"
-yum list installed mongodb-org
+
+yum list installed mongodb-org &>>$LOGFILE
 if [ $? -ne 0 ]
 then
     echo -e "$Y mongodb-org Already Installed..$N"
