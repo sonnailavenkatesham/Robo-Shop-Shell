@@ -78,8 +78,14 @@ VALIDATE $? "start catalogue"
 cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
 VALIDATE $? "copying to mongo.repo"
 
-yum install mongodb-org-shell -y &>>$LOGFILE
-VALIDATE $? "install mongodb-org-shell"
+yum list installed mongodb-org-shell
+if [ $? -ne 0 ]
+then
+    yum install mongodb-org-shell -y &>>$LOGFILE
+    VALIDATE $? "install mongodb-org-shell"
+else
+    echo -e "$Y install mongodb-org-shell Already Installed $N" 
+fi
 
 mongo --host mongodb.venkateshamsonnalia143.online </app/schema/catalogue.js &>>$LOGFILE
 VALIDATE $? "hosted mongodb "
