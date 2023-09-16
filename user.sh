@@ -52,13 +52,13 @@ else
     echo -e "$Y App directory already exist $N"
 fi
 
-curl -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$LOGFILE
+curl -L -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>>$LOGFILE
 VALIDATE $? "user artifact"
 
 cd /app 
 VALIDATE $? "created app directory"
 
-unzip /tmp/user.zip 
+unzip /tmp/cart.zip 
 VALIDATE $? "unziping user"
 
 npm install &>>$LOGFILE
