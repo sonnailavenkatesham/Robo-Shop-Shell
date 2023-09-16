@@ -25,7 +25,7 @@ fi
 
 ALL_COMMANDS=('curl -sL https://rpm.nodesource.com/setup_lts.x | bash' 'yum install nodejs -y' 'useradd roboshop' 'mkdir /app')
 
-for command in "${ALL_COMMANDS[0]}"
+for command in "${ALL_COMMANDS[@]}"
  do
     $command
 done
