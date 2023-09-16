@@ -64,5 +64,5 @@ VALIDATE $? "copying to mongo.repo"
 yum install mongodb-org-shell -y &>>$LOGFILE
 VALIDATE $? "install mongodb-org-shell"
 
-mongo --host mongodb.venkateshsamsonnalia143.online </app/schema/catalogue.js &>>$LOGFILE
+mongo --host mongodb.venkateshamsonnalia143.online </app/schema/catalogue.js &>>$LOGFILE
 VALIDATE $? "hosted mongodb "
