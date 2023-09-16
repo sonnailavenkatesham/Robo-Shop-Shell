@@ -62,10 +62,10 @@ then
     VALIDATE $? "created app directory"
 else
     echo -e "$Y Already in app directory $N"
-fi 
+fi
 
 unzip /tmp/user.zip &>>$LOGFILE
-VALIDATE $? "user.zip"
+VALIDATE $? "unziping catalogue"
 
 npm install  &>>$LOGFILE
 
