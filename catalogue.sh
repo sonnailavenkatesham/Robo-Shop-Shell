@@ -55,7 +55,13 @@ fi
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>>$LOGFILE
 
 cd /app &>>$LOGFILE
-VALIDATE $? "moving to app directory"
+if [ $? -ne 0 ]
+then
+    cd /app &>>$LOGFILE
+    VALIDATE $? "created app directory"
+else
+    echo -e "$Y Already in app directory $N"
+fi
 
 unzip /tmp/catalogue.zip &>>$LOGFILE
 VALIDATE $? "unziping catalogue"
