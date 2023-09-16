@@ -29,19 +29,28 @@ VALIDATE $? "Downloading catalogue artifact"
 yum install nodejs -y &>>$LOGFILE
 VALIDATE $? "Installing nodeJS"
 
-useradd roboshop &>>$LOGFILE
+USER=$(id roboshop)
+if [ $USER -NE 0 ]
+then
+    useradd roboshop &>>$LOGFILE
+fi
 
-mkdir /app &>>$LOGFILE
+ls app
+if [$? -ne o ]
+then
+    mkdir /app &>>$LOGFILE
+fi
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>>$LOGFILE
 
 cd /app &>>$LOGFILE
+VALIDATE $? "moving to app directory"
 
 unzip /tmp/catalogue.zip &>>$LOGFILE
 VALIDATE $? "unziping catalogue"
 
 cd /app &>>$LOGFILE
-VALIDATE $? "moving to app deirectory"
+VALIDATE $? "moving to app directory"
 
 npm install &>>$LOGFILE
 VALIDATE $? "Installing Dependies"
