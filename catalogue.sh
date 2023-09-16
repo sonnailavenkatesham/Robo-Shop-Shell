@@ -53,9 +53,6 @@ VALIDATE $? "moving to app directory"
 unzip /tmp/catalogue.zip &>>$LOGFILE
 VALIDATE $? "unziping catalogue"
 
-cd /app &>>$LOGFILE
-VALIDATE $? "moving to app directory"
-
 npm install &>>$LOGFILE
 VALIDATE $? "Installing Dependies"
 
