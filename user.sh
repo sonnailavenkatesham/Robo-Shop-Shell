@@ -3,7 +3,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-DATE=$(date +%F)
+DATE=$(date +%f)
 LOGDIR=/tmp
 SCRIPT_NAME=$0
 LOGFILE=$LOGDIR/$SCRIPT_NAME-$DATE.log
@@ -53,9 +53,11 @@ else
 fi
 
 curl -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$LOGFILE
+VALIDATE $? "Roboshop zip"
 
-    cd /app &>>$LOGFILE
-    VALIDATE $? "moving to app directory"
+cd /app &>>$LOGFILE
+VALIDATE $? "moving to app directory"
+
 
 unzip /tmp/user.zip &>>$LOGFILE
 VALIDATE $? "unziping user"
@@ -74,7 +76,6 @@ VALIDATE $? "enable user "
 
 systemctl start user &>>$LOGFILE
 VALIDATE $? "start user"
-
 cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
 VALIDATE $? "copying to mongo.repo"
 
