@@ -24,7 +24,7 @@ fi
 }
 
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOGFILE
-VALIDATE $? "Downloading usert artifact"
+VALIDATE $? "Downloading cart artifact"
 
 yum list installed nodejs &>>$LOGFILE
 if [ $? -ne 0 ]
@@ -52,7 +52,7 @@ else
     echo -e "$Y App directory already exist $N"
 fi
 
-curl -o /tmp/usert.zip https://roboshop-builds.s3.amazonaws.com/usert.zip &>>$LOGFILE
+curl -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>>$LOGFILE
 
 ls /app &>>$LOGFILE
 if [ $? -ne 0 ]
@@ -63,35 +63,20 @@ else
     echo -e "$Y Already in app directory $N"
 fi
 
-unzip /tmp/usert.zip &>>$LOGFILE
-VALIDATE $? "unziping usert"
+unzip /tmp/cart.zip &>>$LOGFILE
+VALIDATE $? "unziping cart"
 
 npm install &>>$LOGFILE
 VALIDATE $? "Installing Dependies"
 
-cp /home/centos/Robo-Shop-Shell/usert.service /etc/systemd/system/usert.service &>>$LOGFILE
-VALIDATE $? "copying to usert.service"
+cp /home/centos/Robo-Shop-Shell/cart.service /etc/systemd/system/cart.service &>>$LOGFILE
+VALIDATE $? "copying to cart.service"
 
 systemctl daemon-reload &>>$LOGFILE
 VALIDATE $? "daemon-reload"
 
-systemctl enable usert &>>$LOGFILE
-VALIDATE $? "enable usert "
+systemctl enable cart &>>$LOGFILE
+VALIDATE $? "enable cart "
 
-systemctl start usert &>>$LOGFILE
-VALIDATE $? "start usert"
-
-cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
-VALIDATE $? "copying to mongo.repo"
-
-yum list installed mongodb-org-shell &>>$LOGFILE
-if [ $? -ne 0 ]
-then
-    yum install mongodb-org-shell -y &>>$LOGFILE
-    VALIDATE $? "install mongodb-org-shell"
-else
-    echo -e "$Y install mongodb-org-shell Already Installed $N" 
-fi
-
-mongo --host mongodb.venkateshamsonnalia143.online </app/schema/usert.js &>>$LOGFILE
-VALIDATE $? "hosted mongodb "
+systemctl start cart &>>$LOGFILE
+VALIDATE $? "start cart"
