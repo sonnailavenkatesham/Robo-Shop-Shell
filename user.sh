@@ -53,7 +53,10 @@ else
 fi
 
 curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$LOGFILE
-VALIDATE $? "installing dependencies" 
+VALIDATE $? "installing dependencies"
+
+cd /app &>>$LOGFILE
+VALIDATE $? "moving app directory" 
 
 unzip /tmp/user.zip &>>$LOGFILE
 VALIDATE $? "user.zip"
