@@ -54,7 +54,7 @@ fi
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>>$LOGFILE
 
-cd /app &>>$LOGFILE
+ls /app &>>$LOGFILE
 if [ $? -ne 0 ]
 then
     cd /app &>>$LOGFILE

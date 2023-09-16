@@ -55,7 +55,7 @@ fi
 curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$LOGFILE
 VALIDATE $? "installing dependencies"
 
-cd /app &>>$LOGFILE
+ls /app &>>$LOGFILE
 if [ $? -ne 0 ]
 then
     cd /app &>>$LOGFILE
