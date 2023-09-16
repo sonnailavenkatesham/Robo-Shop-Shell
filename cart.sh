@@ -53,15 +53,11 @@ else
 fi
 
 curl -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>>$LOGFILE
+VALIDATE $? "Roboshop zip"
 
-ls /app &>>$LOGFILE
-if [ $? -ne 0 ]
-then
-    cd /app &>>$LOGFILE
-    VALIDATE $? "created app directory"
-else
-    echo -e "$Y Already in app directory $N"
-fi
+cd /app &>>$LOGFILE
+VALIDATE $? "created app directory"
+
 
 unzip /tmp/cart.zip &>>$LOGFILE
 VALIDATE $? "unziping cart"
