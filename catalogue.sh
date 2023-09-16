@@ -43,8 +43,8 @@ else
     echo -e "$Y user roboshop is already exist $N"
 fi
 
-ls app
-if [$? -ne o ]
+ls /app
+if [ $? -ne o ]
 then
     mkdir /app &>>$LOGFILE
 fi
