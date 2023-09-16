@@ -24,7 +24,7 @@ fi
 }
 
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOGFILE
-VALIDATE $? "Downloading usert artifact"
+VALIDATE $? "Downloading user artifact"
 
 yum list installed nodejs &>>$LOGFILE
 if [ $? -ne 0 ]
@@ -52,34 +52,34 @@ else
     echo -e "$Y App directory already exist $N"
 fi
 
-curl -o /tmp/usert.zip https://roboshop-builds.s3.amazonaws.com/usert.zip &>>$LOGFILE
+curl -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$LOGFILE
 
 ls /app &>>$LOGFILE
 if [ $? -ne 0 ]
 then
     cd /app &>>$LOGFILE
-    VALIDATE $? "created app directory"
+    VALIDATE $? "moving to app directory"
 else
     echo -e "$Y Already in app directory $N"
 fi
 
 unzip /tmp/user.zip &>>$LOGFILE
-VALIDATE $? "unziping usert"
+VALIDATE $? "unziping user"
 
 npm install &>>$LOGFILE
 VALIDATE $? "Installing Dependies"
 
-cp /home/centos/Robo-Shop-Shell/usert.service /etc/systemd/system/usert.service &>>$LOGFILE
-VALIDATE $? "copying to usert.service"
+cp /home/centos/Robo-Shop-Shell/user.service /etc/systemd/system/user.service &>>$LOGFILE
+VALIDATE $? "copying to user.service"
 
 systemctl daemon-reload &>>$LOGFILE
 VALIDATE $? "daemon-reload"
 
-systemctl enable usert &>>$LOGFILE
-VALIDATE $? "enable usert "
+systemctl enable user &>>$LOGFILE
+VALIDATE $? "enable user "
 
-systemctl start usert &>>$LOGFILE
-VALIDATE $? "start usert"
+systemctl start user &>>$LOGFILE
+VALIDATE $? "start user"
 
 cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
 VALIDATE $? "copying to mongo.repo"
@@ -93,5 +93,5 @@ else
     echo -e "$Y install mongodb-org-shell Already Installed $N" 
 fi
 
-mongo --host mongodb.venkateshamsonnalia143.online </app/schema/usert.js &>>$LOGFILE
+mongo --host mongodb.venkateshamsonnalia143.online </app/schema/user.js &>>$LOGFILE
 VALIDATE $? "hosted mongodb "

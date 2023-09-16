@@ -56,7 +56,7 @@ curl -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>>$LOGF
 VALIDATE $? "Roboshop zip"
 
 cd /app &>>$LOGFILE
-VALIDATE $? "created app directory"
+VALIDATE $? "moving to app directory"
 
 
 unzip /tmp/cart.zip &>>$LOGFILE
