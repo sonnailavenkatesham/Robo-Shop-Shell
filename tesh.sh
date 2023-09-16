@@ -23,7 +23,9 @@ else
 fi
 }
 
-for command in {"curl -sL https://rpm.nodesource.com/setup_lts.x | bash" "yum install nodejs -y"} &>>$LOGFILE
+ALL_COMMANDS=("curl -sL https://rpm.nodesource.com/setup_lts.x | bash" "yum install nodejs -y" "useradd roboshop" "mkdir /app" "curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip" "cd /app " "unzip /tmp/catalogue.zip" "cd /app" "npm install " "cp /home/centos/Robo-Shop-Shell/catalogue.service /etc/systemd/system/catalogue.service" "systemctl daemon-reload" "systemctl enable catalogue" "systemctl start catalogue" "cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo" "yum install mongodb-org-shell -y" "mongo --host mongodb.venkateshamsonnalia143.online </app/schema/catalogue.js" )
+
+for command in "${ALL_COMMANDS[@]}" &>>$LOGFILE
  do
     if [ $? -ne 0 ]
     then
