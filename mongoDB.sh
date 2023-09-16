@@ -28,10 +28,10 @@ VALIDATE $? "copying mongo.repo file"
 yum list installed mongodb-org
 if [ $? -ne 0 ]
 then
-    echo -e "$Y MongoDB Already Installed..$N"
+    echo -e "$Y mongodb-org Already Installed..$N"
 else
     yum install mongodb-org -y &>>$LOGFILE
-    VALIDATE $? "Installing MongoDB"
+    VALIDATE $? "mongodb-org"
 fi
 
 systemctl enable mongod &>>$LOGFILE
