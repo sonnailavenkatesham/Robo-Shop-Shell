@@ -56,7 +56,13 @@ curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$L
 VALIDATE $? "installing dependencies"
 
 cd /app &>>$LOGFILE
-VALIDATE $? "moving app directory" 
+if [ $? -ne 0 ]
+then
+    cd /app &>>$LOGFILE
+    VALIDATE $? "created app directory"
+else
+    echo -e "$Y Already in app directory $N"
+fi 
 
 unzip /tmp/user.zip &>>$LOGFILE
 VALIDATE $? "user.zip"
