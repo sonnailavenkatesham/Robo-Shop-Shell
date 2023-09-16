@@ -54,14 +54,8 @@ fi
 
 curl -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$LOGFILE
 
-ls /app &>>$LOGFILE
-if [ $? -ne 0 ]
-then
     cd /app &>>$LOGFILE
     VALIDATE $? "moving to app directory"
-else
-    echo -e "$Y Already in app directory $N"
-fi
 
 unzip /tmp/user.zip &>>$LOGFILE
 VALIDATE $? "unziping user"
