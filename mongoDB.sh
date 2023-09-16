@@ -25,7 +25,11 @@ fi
 
 cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
 VALIDATE $? "copying mongo.repo file"
-
+yum list installed mongodb 
+if [ $? -ne o ]
+then
+    echo -e "$Y MongoDB Already Installed..$N"
+fi
 yum install mongodb-org -y &>>$LOGFILE
 VALIDATE $? "Installing MongoDB"
 
@@ -36,7 +40,7 @@ systemctl start mongod &>>$LOGFILE
 VALIDATE $? "start mongod"
 
 sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$LOGFILE
-VALIDATE $? "chagned mongod config"
+VALIDATE $? "edited mongod config"
 
 systemctl restart mongod &>>$LOGFILE
 VALIDATE $? "restart mongod"
