@@ -23,34 +23,48 @@ else
 fi
 }
 
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOGFILE
 
-yum install nodejs -y
+VALIDATE $? "setting user artifact"
 
-useradd roboshop
+yum install nodejs -y &>>$LOGFILE
+VALIDATE $? "install nodejs"
 
-mkdir /app
+useradd roboshop &>>$LOGFILE
+VALIDATE $? "roboshop"
 
-curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip
+mkdir /app &>>$LOGFILE
+VALIDATE $? "created app directory"
 
-cd /app 
+curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$LOGFILE
+VALIDATE $? "installing dependencies"
 
-unzip /tmp/user.zip
+cd /app &>>$LOGFILE
+VALIDATE $? "moving app directory" 
 
-cd /app 
+unzip /tmp/user.zip &>>$LOGFILE
+VALIDATE $? "user.zip"
 
-npm install 
+cd /app  &>>$LOGFILE
 
-cp /home/centos/Robo-Shop-Shell/user.service /etc/systemd/system/user.service
+npm install  &>>$LOGFILE
 
-systemctl daemon-reload
+cp /home/centos/Robo-Shop-Shell/user.service /etc/systemd/system/user.service &>>$LOGFILE
 
-systemctl enable user 
+systemctl daemon-reload &>>$LOGFILE 
+VALIDATE $? " daemon-reload"
 
-systemctl start user
+systemctl enable user &>>$LOGFILE
+VALIDATE $? " enable user"
 
-cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo
+systemctl start user &>>$LOGFILE 
+VALIDATE $? "start user"
 
-yum install mongodb-org-shell -y
+cp /home/centos/Robo-Shop-Shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE 
+VALIDATE $? "copying mongo.repo "
 
-mongo --host mongodb.venkateshamsonnalia143.online </app/schema/user.js
+yum install mongodb-org-shell -y &>>$LOGFILE
+VALIDATE $? "install mongodb-org-shell"
+
+mongo --host mongodb.venkateshamsonnalia143.online </app/schema/user.js &>>$LOGFILE
+VALIDATE $? "hostted mongodb"
