@@ -5,5 +5,5 @@ num=1
 for i in "${NAME[@]}"
 do 
     echo " Name $num: $i "
-    num=num+1
+    $num=num+1
 done
