@@ -17,8 +17,9 @@ do
                         "ResourceRecordSet": {
                                 "Name": "'$i.$DOMAIN_NAME'",
                                 "Type": "A",
-                                "TTL": 1,
-                        "ResourceRecords": [{ "'Value": "$IP_ADDRESS'"}]
-    }}]
-    }'
+                                "TTL": 300,
+                        "ResourceRecords": [{"'Value": "$IP_ADDRESS'"}]
+                        }}]
+    }
+    '
 done
