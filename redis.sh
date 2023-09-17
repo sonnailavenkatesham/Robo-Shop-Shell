@@ -3,7 +3,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-DATE=$(date +%f)
+DATE=$(date +%F)
 LOGDIR=/tmp
 SCRIPT_NAME=$0
 LOGFILE=$LOGDIR/$SCRIPT_NAME-$DATE.log
@@ -22,21 +22,14 @@ else
     echo -e " $2..$G SUCCESS $N"
 fi
 }
+yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>>$LOGFILE
 
-yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>> $LOGFILE
-VALIDATE $? "rpms.remirepo.net"
+yum module enable redis:remi-6.2 -y &>>$LOGFILE
 
-yum module enable redis:remi-6.2 -y &>> $LOGFILE
-VALIDATE $? "enable redis:remi-6.2"
+yum install redis -y &>>$LOGFILE 
 
-yum install redis -y  &>> $LOGFILE
-VALIDATE $? "install redis"
+sed -i 's/127.0.0.1/0.0.0.0/g' etc/redis.conf /etc/redis/redis.conf
 
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis.conf /etc/redis/redis.conf &>> $LOGFILE
-VALIDATE $? "redis edited congig"
+systemctl enable redis &>>$LOGFILE
 
-systemctl enable redis &>> $LOGFILE
-VALIDATE $? "enable redis"
-
-systemctl start redis &>> $LOGFILE
-VALIDATE $? "start redis"
+systemctl start redis &>>$LOGFILE
